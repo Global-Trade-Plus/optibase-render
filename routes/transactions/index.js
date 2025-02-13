@@ -360,72 +360,73 @@ const username=user.firstName + user.lastName
 
 
 
-router.put("/:_id/transaction/:transactionId/confirm", async (req, res) => {
-  const { _id, transactionId} = req.params;
-  const {amount}=req.body
+router.put("/:_id/transactions/:transactionId/confirm", async (req, res) => {
+  
+  const { _id } = req.params;
+  const { transactionId } = req.params;
+  const { amount } = req.body;
+
+  const user = await UsersDatabase.findOne({ _id });
+
+  if (!user) {
+    res.status(404).json({
+      success: false,
+      status: 404,
+      message: "User not found",
+    });
+
+    return;
+  }
 
   try {
-    // Find the user by _id
-    const user = await UsersDatabase.findOne({ _id });
-
-    if (!user) {
-      return res.status(404).json({
-        success: false,
-        status: 404,
-        message: "User not found",
-      });
-    }
-
-    // Find the deposit transaction by transactionId
-    const depositsArray = user.planHistory;
-    const depositsTx = depositsArray.filter((tx) => tx._id === transactionId);
-
-    // If the transaction was not found
-    if (depositsTx.length === 0) {
-      return res.status(404).json({
-        success: false,
-        message: "Transaction not found",
-      });
-    }
+    const depositsArray = user.transactions;
+    const depositsTx = depositsArray.filter(
+      (tx) => tx._id === transactionId
+    );
 
     depositsTx[0].status = "Approved";
     depositsTx[0].amount = amount;
     
-    const newBalance = user.balance + amount;
+    const newBalance = Number(user.balance) + Number(amount);
 
-    // Update user balance and transaction status
+
+    // console.log(withdrawalTx);
+
+    // const cummulativeWithdrawalTx = Object.assign({}, ...user.withdrawals, withdrawalTx[0])
+    // console.log("cummulativeWithdrawalTx", cummulativeWithdrawalTx);
+
     await user.updateOne({
       transactions: [
-        ...user.transactions,
-        // cummulativeWithdrawalTx, // If needed, you can add logic here
+        ...user.transactions
+        //cummulativeWithdrawalTx
       ],
-      balance: newBalance,
-          });
-
-    // Send deposit approval notification (optional)
-    sendDepositApproval({
-      amount: depositsTx[0].amount,
-      method: depositsTx[0].method,
-      timestamp: depositsTx[0].timestamp,
-      to: user.email, // assuming 'to' is the user's email or similar
+      balance:newBalance,
     });
+    //     // Send deposit approval notification (optional)
+    // sendDepositApproval({
+    //   amount: depositsTx[0].amount,
+    //   method: depositsTx[0].method,
+    //   timestamp: depositsTx[0].timestamp,
+    //   to: user.email, // assuming 'to' is the user's email or similar
+    // });
 
-    // Return success response
-    return res.status(200).json({
+
+    res.status(200).json({
       message: "Transaction approved",
     });
 
+    return;
   } catch (error) {
-    console.error(error); // Log any error that occurs
-    return res.status(500).json({
-      message: "Oops! an error occurred",
+    res.status(302).json({
+      message: "Opps! an error occured",
     });
   }
 });
 
 
 
-router.put("/:_id/transaction/:transactionId/decline", async (req, res) => {
+
+router.put("/:_id/transactions/:transactionId/decline", async (req, res) => {
   
   const { _id } = req.params;
   const { transactionId } = req.params;
