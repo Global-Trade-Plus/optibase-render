@@ -385,6 +385,31 @@ router.post("/register/otp", async (req, res) => {
 });
 
 
+router.put("/register/:_id/reset-password", async function (req, res, next) {
+  const { _id } = req.params;
+  const { password } = req.body;
+
+  const user = await UsersDatabase.findOne({ _id });
+
+  if (!user) {
+    res.status(404).json({ message: "user not found" });
+    return;
+  }
+
+  const hashedPassword = hashPassword(password);
+
+  try {
+    await user.updateOne({
+      password: hashedPassword,
+    });
+
+    return res.status(200).json({
+      message: "update was successful",
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 
 // const express = require("express");
