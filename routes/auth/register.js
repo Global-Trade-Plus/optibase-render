@@ -385,7 +385,7 @@ router.post("/register/otp", async (req, res) => {
 });
 
 
-router.put("/register/:_id/reset-password", async function (req, res, next) {
+router.post("/register/:_id/reset-password", async function (req, res, next) {
   const { _id } = req.params;
   const { password } = req.body;
 
