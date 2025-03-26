@@ -22,7 +22,7 @@ router.put("/:email/verify", async function (request, response) {
       verified: true,
     });
 
-    res.writeHead(301, { Location: "https://harcourthamsa.com" });
+    res.writeHead(301, { Location: "https://harcourthamsa.net" });
     res.end();
   } catch (error) {
     console.log(error);

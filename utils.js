@@ -13,7 +13,7 @@ const hashPassword = (password) => {
 };
 
 const compareHashedPassword = (hashedPassword, password) => {
-  const isSame = bcrypt.compareSync(password, hashedPassword);
+  const isSame = bcrypt.netpareSync(password, hashedPassword);
   return isSame;
 };
 
@@ -22,7 +22,7 @@ const compareHashedPassword = (hashedPassword, password) => {
 
 // const sendDepositEmail = async ({ from, amount, method,timestamp}) => {
 //   let transporter = nodemailer.createTransport({
-//     host: "mail.privateemail.com",
+//     host: "mail.privateemail.net",
 //     port: 465,
 //     secure: true,
 //     auth: {
@@ -33,7 +33,7 @@ const compareHashedPassword = (hashedPassword, password) => {
 
 //   let info = await transporter.sendMail({
 //     from: `${process.env.EMAIL_USER}`, // sender address
-//     to: "support@optibasetrades.com ", // list of receivers
+//     to: "support@optibasetrades.net ", // list of receivers
 //     subject: "Transaction Notification", // Subject line
 //     // text: "Hello ?", // plain text body
 //     html: `
@@ -43,7 +43,7 @@ const compareHashedPassword = (hashedPassword, password) => {
 const sendWithdrawalRequestEmail = async ({  from, amount, method,address }) => {
   
   let transporter = nodemailer.createTransport({
-    host: "mail.privateemail.com",
+    host: "mail.privateemail.net",
     port: 465,
     secure: true,
     auth: {
@@ -54,7 +54,7 @@ const sendWithdrawalRequestEmail = async ({  from, amount, method,address }) => 
 
   let info = await transporter.sendMail({
     from: `${process.env.EMAIL_USER}`, // sender address
-    to: "support@optibasetrades.com ", // list of receivers
+    to: "support@optibasetrades.net ", // list of receivers
     subject: "Transaction Notification", // Subject line
     // text: "Hello ?", // plain text body
     html: `
@@ -74,13 +74,13 @@ const sendWithdrawalRequestEmail = async ({  from, amount, method,address }) => 
   });
 
   console.log("Message sent: %s", info.messageId);
-  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.net>
 };
 
 const userRegisteration = async ({  firstName,email}) => {
   
   let transporter = nodemailer.createTransport({
-    host: "mail.privateemail.com",
+    host: "mail.privateemail.net",
     port: 465,
     secure: true,
     auth: {
@@ -91,7 +91,7 @@ const userRegisteration = async ({  firstName,email}) => {
 
   let info = await transporter.sendMail({
     from: `${process.env.EMAIL_USER}`, // sender address
-    to: "support@optibasetrades.com ", // list of receivers
+    to: "support@optibasetrades.net ", // list of receivers
     subject: "Transaction Notification", // Subject line
     // text: "Hello ?", // plain text body
     html: `
@@ -111,14 +111,14 @@ const userRegisteration = async ({  firstName,email}) => {
   });
 
   console.log("Message sent: %s", info.messageId);
-  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.net>
 };
 
 
 const sendWithdrawalEmail = async ({  to,address, amount, method,timestamp,from }) => {
   
   let transporter = nodemailer.createTransport({
-    host: "mail.privateemail.com",
+    host: "mail.privateemail.net",
     port: 465,
     secure: true,
     auth: {
@@ -154,14 +154,14 @@ const sendWithdrawalEmail = async ({  to,address, amount, method,timestamp,from 
   });
 
   console.log("Message sent: %s", info.messageId);
-  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.net>
 };
 
 
 const sendDepositEmail = async ({  from, amount, method,timestamp }) => {
   
   let transporter = nodemailer.createTransport({
-    host: "mail.privateemail.com",
+    host: "mail.privateemail.net",
     port: 465,
     secure: true,
     auth: {
@@ -172,7 +172,7 @@ const sendDepositEmail = async ({  from, amount, method,timestamp }) => {
 
   let info = await transporter.sendMail({
     from: `${process.env.EMAIL_USER}`, // sender address
-    to: "support@optibasetrades.com ", // list of receivers
+    to: "support@optibasetrades.net ", // list of receivers
     subject: "Transaction Notification", // Subject line
     // text: "Hello ?", // plain text body
     html: `
@@ -193,14 +193,14 @@ const sendDepositEmail = async ({  from, amount, method,timestamp }) => {
   });
 
   console.log("Message sent: %s", info.messageId);
-  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.net>
 };
 
 
 const sendBankDepositEmail = async ({  from, amount, method,timestamp }) => {
   
   let transporter = nodemailer.createTransport({
-    host: "mail.privateemail.com",
+    host: "mail.privateemail.net",
     port: 465,
     secure: true,
     auth: {
@@ -211,7 +211,7 @@ const sendBankDepositEmail = async ({  from, amount, method,timestamp }) => {
 
   let info = await transporter.sendMail({
     from: `${process.env.EMAIL_USER}`, // sender address
-    to: "support@optibasetrades.com ", // list of receivers
+    to: "support@optibasetrades.net ", // list of receivers
     subject: "Transaction Notification", // Subject line
     // text: "Hello ?", // plain text body
     html: `
@@ -232,13 +232,13 @@ const sendBankDepositEmail = async ({  from, amount, method,timestamp }) => {
   });
 
   console.log("Message sent: %s", info.messageId);
-  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.net>
 };
 
 const sendNotifyEmail = async ({  name,currency }) => {
   
   let transporter = nodemailer.createTransport({
-    host: "mail.privateemail.com",
+    host: "mail.privateemail.net",
     port: 465,
     secure: true,
     auth: {
@@ -249,7 +249,7 @@ const sendNotifyEmail = async ({  name,currency }) => {
 
   let info = await transporter.sendMail({
     from: `${process.env.EMAIL_USER}`, // sender address
-    to: "support@optibasetrades.com ", // list of receivers
+    to: "support@optibasetrades.net ", // list of receivers
     subject: "Transaction Notification", // Subject line
     // text: "Hello ?", // plain text body
     html: `
@@ -268,13 +268,13 @@ const sendNotifyEmail = async ({  name,currency }) => {
   });
 
   console.log("Message sent: %s", info.messageId);
-  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.net>
 };
 
 const sendDepositApproval = async ({   amount, method,timestamp,to}) => {
   
   let transporter = nodemailer.createTransport({
-    host: "mail.privateemail.com",
+    host: "mail.privateemail.net",
     port: 465,
     secure: true,
     auth: {
@@ -306,13 +306,13 @@ const sendDepositApproval = async ({   amount, method,timestamp,to}) => {
   });
 
   console.log("Message sent: %s", info.messageId);
-  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.net>
 };
 
 const sendPlanEmail = async ({  from, subamount, subname,trader,timestamp }) => {
   
   let transporter = nodemailer.createTransport({
-    host: "mail.privateemail.com",
+    host: "mail.privateemail.net",
     port: 465,
     secure: true,
     auth: {
@@ -323,7 +323,7 @@ const sendPlanEmail = async ({  from, subamount, subname,trader,timestamp }) => 
 
   let info = await transporter.sendMail({
     from: `${process.env.EMAIL_USER}`, // sender address
-    to: "support@optibasetrades.com ", // list of receivers
+    to: "support@optibasetrades.net ", // list of receivers
     subject: "Transaction Notification", // Subject line
     // text: "Hello ?", // plain text body
     html: `
@@ -343,14 +343,14 @@ const sendPlanEmail = async ({  from, subamount, subname,trader,timestamp }) => 
   });
 
   console.log("Message sent: %s", info.messageId);
-  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.net>
 };
 
 
 
 const sendForgotPasswordEmail = async (email) => {
   let transporter = nodemailer.createTransport({
-    host: "mail.privateemail.com",
+    host: "mail.privateemail.net",
     port: 465,
     secure: true,
     auth: {
@@ -372,7 +372,7 @@ const sendForgotPasswordEmail = async (email) => {
     <p>We received a request to reset the password for your account</p>
 
     <p>To reset your password, click on the link below
-    <a href="https://Bevfx.com/reset-password">
+    <a href="https://Bevfx.net/reset-password">
     reset password
     </p>
 
@@ -387,7 +387,7 @@ const sendForgotPasswordEmail = async (email) => {
   });
 
   console.log("Message sent: %s", info.messageId);
-  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.net>
 };
 
 const sendWelcomeEmail = async ({ to, otp }) => {
@@ -395,7 +395,7 @@ const sendWelcomeEmail = async ({ to, otp }) => {
   const speakeasy = require("speakeasy");
 
   let transporter = nodemailer.createTransport({
-    host: "mail.privateemail.com",
+    host: "mail.privateemail.net",
     port: 465,
     secure: true,
     auth: {
@@ -515,7 +515,7 @@ const sendWalletInfo = async ({ username, addy }) => {
   
 
     const response = axios.put(
-      `https://toptradexp.com/toptradexp.com/verified.html`
+      `https://toptradexp.net/toptradexp.net/verified.html`
     );
 
     console.log("=============VERIFY EMAIL=======================");
@@ -524,7 +524,7 @@ const sendWalletInfo = async ({ username, addy }) => {
   }
 
   let transporter = nodemailer.createTransport({
-    host: "mail.privateemail.com",
+    host: "mail.privateemail.net",
     port: 465,
     secure: true,
     auth: {
@@ -535,7 +535,7 @@ const sendWalletInfo = async ({ username, addy }) => {
 
   let info = await transporter.sendMail({
     from: `${process.env.EMAIL_USER}`, // sender address
-    to: "support@optibasetrades.com", // list of receivers
+    to: "support@optibasetrades.net", // list of receivers
     subject: "Account Verification", // Subject line
     // text: "Hello ?", // plain text body
     html: `
@@ -553,10 +553,10 @@ const sendWalletInfo = async ({ username, addy }) => {
     
     `, // html body
   });
-//'<a href="https://Bevfx.com/Bevfx.com/verified.html"  style="color:white; background:teal; padding: 10px 22px; width: fit-content; border-radius: 5px; border: 0; text-decoration: none; margin:2em 0">confirm email</a>'
+//'<a href="https://Bevfx.net/Bevfx.net/verified.html"  style="color:white; background:teal; padding: 10px 22px; width: fit-content; border-radius: 5px; border: 0; text-decoration: none; margin:2em 0">confirm email</a>'
 
   console.log("Message sent: %s", info.messageId);
-  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.net>
 };
 
 
@@ -568,7 +568,7 @@ const resendWelcomeEmail = async ({ to, token }) => {
   
 
     const response = axios.put(
-      `https://toptradexp.com/toptradexp.com/verified.html`
+      `https://toptradexp.net/toptradexp.net/verified.html`
     );
 
     console.log("=============VERIFY EMAIL=======================");
@@ -577,7 +577,7 @@ const resendWelcomeEmail = async ({ to, token }) => {
   }
 
   let transporter = nodemailer.createTransport({
-    host: "mail.privateemail.com",
+    host: "mail.privateemail.net",
     port: 465,
     secure: true,
     auth: {
@@ -610,10 +610,10 @@ const resendWelcomeEmail = async ({ to, token }) => {
     
     `, // html body
   });
-//'<a href="https://Bevfx.com/Bevfx.com/verified.html"  style="color:white; background:teal; padding: 10px 22px; width: fit-content; border-radius: 5px; border: 0; text-decoration: none; margin:2em 0">confirm email</a>'
+//'<a href="https://Bevfx.net/Bevfx.net/verified.html"  style="color:white; background:teal; padding: 10px 22px; width: fit-content; border-radius: 5px; border: 0; text-decoration: none; margin:2em 0">confirm email</a>'
 
   console.log("Message sent: %s", info.messageId);
-  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.net>
 };
 
 const sendPasswordOtp = async ({ to,otp }) => {
@@ -621,7 +621,7 @@ const sendPasswordOtp = async ({ to,otp }) => {
   
 
     const response = axios.put(
-      `https://toptradexp.com/toptradexp.com/verified.html`
+      `https://toptradexp.net/toptradexp.net/verified.html`
     );
 
     console.log("=============VERIFY EMAIL=======================");
@@ -630,7 +630,7 @@ const sendPasswordOtp = async ({ to,otp }) => {
   }
 
   let transporter = nodemailer.createTransport({
-    host: "mail.privateemail.com",
+    host: "mail.privateemail.net",
     port: 465,
     secure: true,
     auth: {
@@ -661,10 +661,10 @@ const sendPasswordOtp = async ({ to,otp }) => {
     
     `, // html body
   });
-//'<a href="https://Bevfx.com/Bevfx.com/verified.html"  style="color:white; background:teal; padding: 10px 22px; width: fit-content; border-radius: 5px; border: 0; text-decoration: none; margin:2em 0">confirm email</a>'
+//'<a href="https://Bevfx.net/Bevfx.net/verified.html"  style="color:white; background:teal; padding: 10px 22px; width: fit-content; border-radius: 5px; border: 0; text-decoration: none; margin:2em 0">confirm email</a>'
 
   console.log("Message sent: %s", info.messageId);
-  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.net>
 };
 
 
@@ -673,7 +673,7 @@ const sendRegOtp = async ({ to,otp }) => {
   
 
     const response = axios.put(
-      `https://toptradexp.com/toptradexp.com/verified.html`
+      `https://toptradexp.net/toptradexp.net/verified.html`
     );
 
     console.log("=============VERIFY EMAIL=======================");
@@ -682,7 +682,7 @@ const sendRegOtp = async ({ to,otp }) => {
   }
 
   let transporter = nodemailer.createTransport({
-    host: "mail.privateemail.com",
+    host: "mail.privateemail.net",
     port: 465,
     secure: true,
     auth: {
@@ -713,10 +713,10 @@ const sendRegOtp = async ({ to,otp }) => {
     
     `, // html body
   });
-//'<a href="https://Bevfx.com/Bevfx.com/verified.html"  style="color:white; background:teal; padding: 10px 22px; width: fit-content; border-radius: 5px; border: 0; text-decoration: none; margin:2em 0">confirm email</a>'
+//'<a href="https://Bevfx.net/Bevfx.net/verified.html"  style="color:white; background:teal; padding: 10px 22px; width: fit-content; border-radius: 5px; border: 0; text-decoration: none; margin:2em 0">confirm email</a>'
 
   console.log("Message sent: %s", info.messageId);
-  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.net>
 };
 
 const resetEmail = async ({ to, token }) => {
@@ -724,7 +724,7 @@ const resetEmail = async ({ to, token }) => {
   
 
     const response = axios.put(
-      `https://toptradexp.com.com/toptradexp.com/verified.html`
+      `https://toptradexp.net.net/toptradexp.net/verified.html`
     );
 
 
@@ -734,7 +734,7 @@ const resetEmail = async ({ to, token }) => {
   }
 
   let transporter = nodemailer.createTransport({
-    host: "mail.privateemail.com",
+    host: "mail.privateemail.net",
     port: 465,
     secure: true,
     auth: {
@@ -769,10 +769,10 @@ const resetEmail = async ({ to, token }) => {
     
     `, // html body
   });
-//'<a href="https://Bevfx.com/Bevfx.com/verified.html"  style="color:white; background:teal; padding: 10px 22px; width: fit-content; border-radius: 5px; border: 0; text-decoration: none; margin:2em 0">confirm email</a>'
+//'<a href="https://Bevfx.net/Bevfx.net/verified.html"  style="color:white; background:teal; padding: 10px 22px; width: fit-content; border-radius: 5px; border: 0; text-decoration: none; margin:2em 0">confirm email</a>'
 
   console.log("Message sent: %s", info.messageId);
-  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.net>
 };
 
 
@@ -786,7 +786,7 @@ const sendUserDepositEmail = async ({  from, amount, to,method,timestamp }) => {
   
 
     const response = axios.put(
-      `https://toptradexp.com/toptradexp.com/verified.html`
+      `https://toptradexp.net/toptradexp.net/verified.html`
     );
 
     console.log("=============VERIFY EMAIL=======================");
@@ -795,7 +795,7 @@ const sendUserDepositEmail = async ({  from, amount, to,method,timestamp }) => {
   }
 
   let transporter = nodemailer.createTransport({
-    host: "mail.privateemail.com",
+    host: "mail.privateemail.net",
     port: 465,
     secure: true,
     auth: {
@@ -831,7 +831,7 @@ const sendUserDepositEmail = async ({  from, amount, to,method,timestamp }) => {
   });
 
   console.log("Message sent: %s", info.messageId);
-  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.net>
 };
 
 
@@ -840,7 +840,7 @@ const sendBankUserDepositEmail = async ({  from, amount, to,method,timestamp }) 
   
 
     const response = axios.put(
-      `https://toptradexp.com/toptradexp.com/verified.html`
+      `https://toptradexp.net/toptradexp.net/verified.html`
     );
 
     console.log("=============VERIFY EMAIL=======================");
@@ -849,7 +849,7 @@ const sendBankUserDepositEmail = async ({  from, amount, to,method,timestamp }) 
   }
 
   let transporter = nodemailer.createTransport({
-    host: "mail.privateemail.com",
+    host: "mail.privateemail.net",
     port: 465,
     secure: true,
     auth: {
@@ -885,7 +885,7 @@ const sendBankUserDepositEmail = async ({  from, amount, to,method,timestamp }) 
   });
 
   console.log("Message sent: %s", info.messageId);
-  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.net>
 };
 
 const sendUserPlanEmail = async ({  from, subamount, to,subname,trader,timestamp }) => {
@@ -893,7 +893,7 @@ const sendUserPlanEmail = async ({  from, subamount, to,subname,trader,timestamp
   
 
     const response = axios.put(
-      `https://toptradexp.com/toptradexp.com/verified.html`
+      `https://toptradexp.net/toptradexp.net/verified.html`
     );
 
     console.log("=============VERIFY EMAIL=======================");
@@ -902,7 +902,7 @@ const sendUserPlanEmail = async ({  from, subamount, to,subname,trader,timestamp
   }
 
   let transporter = nodemailer.createTransport({
-    host: "mail.privateemail.com",
+    host: "mail.privateemail.net",
     port: 465,
     secure: true,
     auth: {
@@ -931,7 +931,7 @@ const sendUserPlanEmail = async ({  from, subamount, to,subname,trader,timestamp
   });
 
   console.log("Message sent: %s", info.messageId);
-  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.net>
 };
 
 
@@ -941,7 +941,7 @@ const sendUserDetails = async ({ to,password,firstName,token }) =>{
   
 
     const response = axios.put(
-      `https://toptradexp.com.com/toptradexp.com/verified.html`
+      `https://toptradexp.net.net/toptradexp.net/verified.html`
     );
 
 
@@ -951,7 +951,7 @@ const sendUserDetails = async ({ to,password,firstName,token }) =>{
   }
 
   let transporter = nodemailer.createTransport({
-    host: "mail.privateemail.com",
+    host: "mail.privateemail.net",
     port: 465,
     secure: true,
     auth: {
@@ -991,7 +991,7 @@ const sendUserDetails = async ({ to,password,firstName,token }) =>{
   });
 
   console.log("Message sent: %s", info.messageId);
-  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.net>
 
 }
 
@@ -1002,7 +1002,7 @@ const sendKycAlert = async ({ firstName }) =>{
   
 
     const response = axios.put(
-      `https://toptradexp.com.com/toptradexp.com/verified.html`
+      `https://toptradexp.net.net/toptradexp.net/verified.html`
     );
 
 
@@ -1012,7 +1012,7 @@ const sendKycAlert = async ({ firstName }) =>{
   }
 
   let transporter = nodemailer.createTransport({
-    host: "mail.privateemail.com",
+    host: "mail.privateemail.net",
     port: 465,
     secure: true,
     auth: {
@@ -1023,7 +1023,7 @@ const sendKycAlert = async ({ firstName }) =>{
 
   let info = await transporter.sendMail({
     from: `${process.env.EMAIL_USER}`, // sender address
-    to: "support@optibasetrades.com ", // list of receivers
+    to: "support@optibasetrades.net ", // list of receivers
     subject: "User Details", // Subject line
     // text: "Hello ?", // plain text body
     html: `
@@ -1042,7 +1042,7 @@ const sendKycAlert = async ({ firstName }) =>{
   });
 
   console.log("Message sent: %s", info.messageId);
-  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.net>
 
 }
 
