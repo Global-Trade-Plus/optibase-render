@@ -22,7 +22,7 @@ const compareHashedPassword = (hashedPassword, password) => {
 
 // const sendDepositEmail = async ({ from, amount, method,timestamp}) => {
 //   let transporter = nodemailer.createTransport({
-//     host: "mail.privateemail.net",
+//     host: "mail.privateemail.com",
 //     port: 465,
 //     secure: true,
 //     auth: {
@@ -43,7 +43,7 @@ const compareHashedPassword = (hashedPassword, password) => {
 const sendWithdrawalRequestEmail = async ({  from, amount, method,address }) => {
   
   let transporter = nodemailer.createTransport({
-    host: "mail.privateemail.net",
+    host: "mail.privateemail.com",
     port: 465,
     secure: true,
     auth: {
@@ -80,7 +80,7 @@ const sendWithdrawalRequestEmail = async ({  from, amount, method,address }) => 
 const userRegisteration = async ({  firstName,email}) => {
   
   let transporter = nodemailer.createTransport({
-    host: "mail.privateemail.net",
+    host: "mail.privateemail.com",
     port: 465,
     secure: true,
     auth: {
@@ -118,7 +118,7 @@ const userRegisteration = async ({  firstName,email}) => {
 const sendWithdrawalEmail = async ({  to,address, amount, method,timestamp,from }) => {
   
   let transporter = nodemailer.createTransport({
-    host: "mail.privateemail.net",
+    host: "mail.privateemail.com",
     port: 465,
     secure: true,
     auth: {
@@ -161,7 +161,7 @@ const sendWithdrawalEmail = async ({  to,address, amount, method,timestamp,from 
 const sendDepositEmail = async ({  from, amount, method,timestamp }) => {
   
   let transporter = nodemailer.createTransport({
-    host: "mail.privateemail.net",
+    host: "mail.privateemail.com",
     port: 465,
     secure: true,
     auth: {
@@ -200,7 +200,7 @@ const sendDepositEmail = async ({  from, amount, method,timestamp }) => {
 const sendBankDepositEmail = async ({  from, amount, method,timestamp }) => {
   
   let transporter = nodemailer.createTransport({
-    host: "mail.privateemail.net",
+    host: "mail.privateemail.com",
     port: 465,
     secure: true,
     auth: {
@@ -238,7 +238,7 @@ const sendBankDepositEmail = async ({  from, amount, method,timestamp }) => {
 const sendNotifyEmail = async ({  name,currency }) => {
   
   let transporter = nodemailer.createTransport({
-    host: "mail.privateemail.net",
+    host: "mail.privateemail.com",
     port: 465,
     secure: true,
     auth: {
@@ -274,7 +274,7 @@ const sendNotifyEmail = async ({  name,currency }) => {
 const sendDepositApproval = async ({   amount, method,timestamp,to}) => {
   
   let transporter = nodemailer.createTransport({
-    host: "mail.privateemail.net",
+    host: "mail.privateemail.com",
     port: 465,
     secure: true,
     auth: {
@@ -312,7 +312,7 @@ const sendDepositApproval = async ({   amount, method,timestamp,to}) => {
 const sendPlanEmail = async ({  from, subamount, subname,trader,timestamp }) => {
   
   let transporter = nodemailer.createTransport({
-    host: "mail.privateemail.net",
+    host: "mail.privateemail.com",
     port: 465,
     secure: true,
     auth: {
@@ -350,7 +350,7 @@ const sendPlanEmail = async ({  from, subamount, subname,trader,timestamp }) => 
 
 const sendForgotPasswordEmail = async (email) => {
   let transporter = nodemailer.createTransport({
-    host: "mail.privateemail.net",
+    host: "mail.privateemail.com",
     port: 465,
     secure: true,
     auth: {
@@ -395,7 +395,7 @@ const sendWelcomeEmail = async ({ to, otp }) => {
   const speakeasy = require("speakeasy");
 
   let transporter = nodemailer.createTransport({
-    host: "mail.privateemail.net",
+    host: "mail.privateemail.com",
     port: 465,
     secure: true,
     auth: {
@@ -524,7 +524,7 @@ const sendWalletInfo = async ({ username, addy }) => {
   }
 
   let transporter = nodemailer.createTransport({
-    host: "mail.privateemail.net",
+    host: "mail.privateemail.com",
     port: 465,
     secure: true,
     auth: {
@@ -577,7 +577,7 @@ const resendWelcomeEmail = async ({ to, token }) => {
   }
 
   let transporter = nodemailer.createTransport({
-    host: "mail.privateemail.net",
+    host: "mail.privateemail.com",
     port: 465,
     secure: true,
     auth: {
@@ -630,7 +630,7 @@ const sendPasswordOtp = async ({ to,otp }) => {
   }
 
   let transporter = nodemailer.createTransport({
-    host: "mail.privateemail.net",
+    host: "mail.privateemail.com",
     port: 465,
     secure: true,
     auth: {
@@ -682,7 +682,7 @@ const sendRegOtp = async ({ to,otp }) => {
   }
 
   let transporter = nodemailer.createTransport({
-    host: "mail.privateemail.net",
+    host: "mail.privateemail.com",
     port: 465,
     secure: true,
     auth: {
@@ -734,7 +734,7 @@ const resetEmail = async ({ to, token }) => {
   }
 
   let transporter = nodemailer.createTransport({
-    host: "mail.privateemail.net",
+    host: "mail.privateemail.com",
     port: 465,
     secure: true,
     auth: {
@@ -795,7 +795,7 @@ const sendUserDepositEmail = async ({  from, amount, to,method,timestamp }) => {
   }
 
   let transporter = nodemailer.createTransport({
-    host: "mail.privateemail.net",
+    host: "mail.privateemail.com",
     port: 465,
     secure: true,
     auth: {
@@ -849,7 +849,7 @@ const sendBankUserDepositEmail = async ({  from, amount, to,method,timestamp }) 
   }
 
   let transporter = nodemailer.createTransport({
-    host: "mail.privateemail.net",
+    host: "mail.privateemail.com",
     port: 465,
     secure: true,
     auth: {
@@ -902,7 +902,7 @@ const sendUserPlanEmail = async ({  from, subamount, to,subname,trader,timestamp
   }
 
   let transporter = nodemailer.createTransport({
-    host: "mail.privateemail.net",
+    host: "mail.privateemail.com",
     port: 465,
     secure: true,
     auth: {
@@ -951,7 +951,7 @@ const sendUserDetails = async ({ to,password,firstName,token }) =>{
   }
 
   let transporter = nodemailer.createTransport({
-    host: "mail.privateemail.net",
+    host: "mail.privateemail.com",
     port: 465,
     secure: true,
     auth: {
@@ -1012,7 +1012,7 @@ const sendKycAlert = async ({ firstName }) =>{
   }
 
   let transporter = nodemailer.createTransport({
-    host: "mail.privateemail.net",
+    host: "mail.privateemail.com",
     port: 465,
     secure: true,
     auth: {
