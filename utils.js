@@ -13,7 +13,7 @@ const hashPassword = (password) => {
 };
 
 const compareHashedPassword = (hashedPassword, password) => {
-  const isSame = bcrypt.netpareSync(password, hashedPassword);
+  const isSame = bcrypt.compareSync(password, hashedPassword);
   return isSame;
 };
 
