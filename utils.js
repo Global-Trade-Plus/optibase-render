@@ -1166,7 +1166,7 @@ async function userRegistration({ firstName, email }) {
 }
 
 // 2. Email verification OTP
-async function sendOTPEmail({ email, otp }) {
+async function sendWelcomeEmail({ email, otp }) {
   const html = `
     <p>Hello,</p>
     <p>Your one-time verification code is:</p>
@@ -1406,7 +1406,7 @@ export {
   compareHashedPassword,
   sendEmail,
   userRegistration,
-  sendOTPEmail,
+  sendWelcomeEmail,
   passwordReset,
   depositNotification,
   withdrawalRequest,
