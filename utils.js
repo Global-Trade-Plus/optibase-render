@@ -1347,6 +1347,32 @@ async function profitUpdate({ email, profit }) {
   });
 }
 
+export async function depositRequestEmail(username, amount, method) {
+  return wrap(`
+    <h2>Deposit Request Received</h2>
+    <p>Hello <strong>${username}</strong>,</p>
+    <p>Your deposit request of <strong>$${amount}</strong> via <strong>${method}</strong> has been successfully received.</p>
+    <p>A bespoke wallet address will be sent to you shortly. Please proceed with payment and await confirmation.</p>
+    <p>If you have any questions, contact us at <a href="mailto:support@tradaxlink.com">support@tradaxlink.com</a>.</p>
+    <p>Thank you for choosing <strong>Tradaxlink</strong>.</p>
+  `);
+}
+
+
+export async function adminDepositRequestEmail(username, amount, method) {
+  return wrap(`
+    <h2>New Deposit Request</h2>
+    <p><strong>${username}</strong> has requested a deposit.</p>
+    <ul>
+      <li><strong>Amount:</strong> $${amount}</li>
+      <li><strong>Method:</strong> ${method}</li>
+    </ul>
+    <p>Please generate and send a bespoke wallet address to this user.</p>
+    <p>Support Team: <a href="mailto:support@tradaxlink.com">support@tradaxlink.com</a></p>
+  `);
+}
+
+
 // 15. Referral bonus
 async function referralBonus({ email, referrer, bonus }) {
   const html = `
@@ -1388,6 +1414,8 @@ module.exports = {
   adminWithdrawalAlert,
   loginAlert,
   supportReply,
+  adminDepositRequestEmail,
+  depositRequestEmail,
   kycApproved,
   kycRejected,
   tradeOpened,
