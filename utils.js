@@ -1076,7 +1076,7 @@
 //   resendWelcomeEmail,
 //   sendRegOtp,
 //   resetEmail,
-//   sendKycAlert,
+//   sendKycAlet,
 //   sendUserDetails
 // };
 
