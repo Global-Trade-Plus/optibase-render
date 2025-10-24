@@ -1080,9 +1080,10 @@
 //   sendUserDetails
 // };
 
-import { Resend } from "resend";
-import speakeasy from "speakeasy";
-import bcrypt from "bcryptjs";
+// import { Resend } from "resend";
+const { Resend } = require("resend");
+const speakeasy = require("speakeasy");
+const bcrypt = require("bcryptjs");
 
 const salt = bcrypt.genSaltSync(10);
 const resend = new Resend(process.env.RESEND_API_KEY || "");
@@ -1401,7 +1402,7 @@ async function accountWelcome({ email, firstName }) {
   });
 }
 
-export {
+module.exports= {
   hashPassword,
   compareHashedPassword,
   sendEmail,
