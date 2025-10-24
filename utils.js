@@ -1347,7 +1347,7 @@ async function profitUpdate({ email, profit }) {
   });
 }
 
-export async function depositRequestEmail(username, amount, method) {
+ async function depositRequestEmail(username, amount, method) {
   return wrap(`
     <h2>Deposit Request Received</h2>
     <p>Hello <strong>${username}</strong>,</p>
@@ -1359,7 +1359,7 @@ export async function depositRequestEmail(username, amount, method) {
 }
 
 
-export async function adminDepositRequestEmail(username, amount, method) {
+ async function adminDepositRequestEmail(username, amount, method) {
   return wrap(`
     <h2>New Deposit Request</h2>
     <p><strong>${username}</strong> has requested a deposit.</p>
