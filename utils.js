@@ -463,7 +463,7 @@ const sendWelcomeEmail = async ({ to, otp }) => {
         </html>
       `
     });
-    console.log("✅ Welcome email sent successfully");
+    console.log("✅ Welcome email sent successfully"  +to);
   } catch (error) {
     console.error("❌ Error sending welcome email:", error);
     throw error;
