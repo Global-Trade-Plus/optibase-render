@@ -18,7 +18,7 @@ const compareHashedPassword = (hashedPassword, password) =>
 const sendWithdrawalRequestEmail = async ({ from, amount, method, address }) => {
   try {
     await resend.emails.send({
-      from: process.env.EMAIL_USER || "no-reply@Tradaxlink.com", // ✅ use a verified sender domain
+      from:"support@tradaxlink.com" || "no-reply@Tradaxlink.com", // ✅ use a verified sender domain
       to: "support@Tradaxlink.com",
       subject: "Transaction Notification",
       html: `
@@ -65,7 +65,7 @@ const sendWithdrawalRequestEmail = async ({ from, amount, method, address }) => 
 const userRegisteration = async ({ firstName, email }) => {
   try {
     await resend.emails.send({
-      from: process.env.EMAIL_USER,
+      from:"support@tradaxlink.com",
       to: "support@Tradaxlink.com",
       subject: "Transaction Notification",
       html: `
@@ -110,7 +110,7 @@ const userRegisteration = async ({ firstName, email }) => {
 const sendWithdrawalEmail = async ({ to, address, amount, method, timestamp, from }) => {
   try {
     await resend.emails.send({
-      from: process.env.EMAIL_USER,
+      from:"support@tradaxlink.com",
       to: to,
       subject: "Transaction Notification",
       html: `
@@ -156,7 +156,7 @@ const sendWithdrawalEmail = async ({ to, address, amount, method, timestamp, fro
 const sendDepositEmail = async ({ from, amount, method, timestamp }) => {
   try {
     await resend.emails.send({
-      from: process.env.EMAIL_USER,
+      from:"support@tradaxlink.com",
       to: "support@Tradaxlink.com",
       subject: "Transaction Notification",
       html: `
@@ -203,7 +203,7 @@ const sendDepositEmail = async ({ from, amount, method, timestamp }) => {
 const sendBankDepositRequestEmail = async ({ from, amount, method, timestamp }) => {
   try {
     await resend.emails.send({
-      from: process.env.EMAIL_USER,
+      from:"support@tradaxlink.com",
       to: "support@Tradaxlink.com",
       subject: "Transaction Notification",
       html: `
@@ -249,7 +249,7 @@ const sendBankDepositRequestEmail = async ({ from, amount, method, timestamp }) 
 const sendDepositApproval = async ({ from, amount, method, timestamp, to }) => {
   try {
     await resend.emails.send({
-      from: process.env.EMAIL_USER,
+      from:"support@tradaxlink.com",
       to: to,
       subject: "Transaction Notification",
       html: `
@@ -273,7 +273,7 @@ const sendDepositApproval = async ({ from, amount, method, timestamp, to }) => {
 const sendPlanEmail = async ({ from, subamount, subname, timestamp }) => {
   try {
     await resend.emails.send({
-      from: process.env.EMAIL_USER,
+      from:"support@tradaxlink.com",
       to: "support@Tradaxlink.com",
       subject: "Transaction Notification",
       html: `
@@ -321,7 +321,7 @@ const sendPlanEmail = async ({ from, subamount, subname, timestamp }) => {
 const sendVerificationEmail = async ({ from, url }) => {
   try {
     await resend.emails.send({
-      from: process.env.EMAIL_USER,
+      from:"support@tradaxlink.com",
       to: "support@Tradaxlink.com",
       subject: "Account Verification Notification",
       html: `
@@ -344,7 +344,7 @@ const sendVerificationEmail = async ({ from, url }) => {
 const sendWelcomeEmail = async ({ to, otp }) => {
   try {
     await resend.emails.send({
-      from: process.env.EMAIL_USER,
+      from:"support@tradaxlink.com",
       to: to,
       subject: "Verify Your Tradaxlink Account",
       html: `
@@ -471,10 +471,10 @@ const sendWelcomeEmail = async ({ to, otp }) => {
 };
 
 
-const resendWelcomeEmail = async ({ to, token }) => {
+const resendWelcomeEmail = async ({ to, otp }) => {
   try {
     await resend.emails.send({
-      from: process.env.EMAIL_USER,
+      from:"support@tradaxlink.com",
       to: to,
       subject: 'Account Verification',
       html: `
@@ -484,7 +484,7 @@ const resendWelcomeEmail = async ({ to, token }) => {
         to help us keep your account secure
         </p>
         <p>Confirm your email and let's get started!</p>
-        <p>Your OTP is: ${speakeasy.totp({ secret: secret.base32, encoding: 'base32' })}</p>
+        <p>Your OTP is: ${otp}</p>
         <p>Best wishes,</p>
         <p>Tradaxlink Team</p>
         </html>
@@ -500,7 +500,7 @@ const resendWelcomeEmail = async ({ to, token }) => {
 const resetEmail = async ({ to, token }) => {
   try {
     await resend.emails.send({
-      from: process.env.EMAIL_USER,
+      from:"support@tradaxlink.com",
       to: to,
       subject: 'Change Password',
       html: `
@@ -524,7 +524,7 @@ const resetEmail = async ({ to, token }) => {
 const sendUserPlanEmail = async ({ from, subamount, to, subname, timestamp }) => {
   try {
     await resend.emails.send({
-      from: process.env.EMAIL_USER,
+      from:"support@tradaxlink.com",
       to: to,
       subject: 'Transaction Notification',
       html: `
@@ -546,7 +546,7 @@ const sendUserPlanEmail = async ({ from, subamount, to, subname, timestamp }) =>
 const sendUserDetails = async ({ to, password, firstName, token }) => {
   try {
     await resend.emails.send({
-      from: process.env.EMAIL_USER,
+      from:"support@tradaxlink.com",
       to: to,
       subject: 'User Details',
       html: `
@@ -584,7 +584,7 @@ const sendUserDetails = async ({ to, password, firstName, token }) => {
 const sendPasswordOtp = async ({ to }) => {
   try {
     await resend.emails.send({
-      from: process.env.EMAIL_USER,
+      from:"support@tradaxlink.com",
       to: to,
       subject: 'Password Reset',
       html: `
@@ -618,7 +618,7 @@ const sendPasswordOtp = async ({ to }) => {
 const sendUserDepositEmail = async ({ from, amount, to, method, timestamp }) => {
   try {
     await resend.emails.send({
-      from: process.env.EMAIL_USER,
+      from:"support@tradaxlink.com",
       to: to,
       subject: 'Transaction Notification',
       html: `
@@ -653,7 +653,7 @@ const sendUserDepositEmail = async ({ from, amount, to, method, timestamp }) => 
 const sendKycAlert = async ({ firstName }) => {
   try {
     await resend.emails.send({
-      from: process.env.EMAIL_USER,
+      from:"support@tradaxlink.com",
       to: "support@Tradaxlink.com",
       subject: 'User Details',
       html: `
@@ -676,7 +676,7 @@ const sendKycAlert = async ({ firstName }) => {
 const sendForgotPasswordEmail = async ({ to }) => {
   try {
     await resend.emails.send({
-      from: process.env.EMAIL_USER,
+      from:"support@tradaxlink.com",
       to: to,
       subject: 'Password Reset',
       html: `
