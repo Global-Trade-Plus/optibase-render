@@ -1,10 +1,7 @@
 var express = require("express");
-var { hashPassword,sendPasswordOtp,sendRegOtp,userRegisteration, sendWelcomeEmail,resendWelcomeEmail,resetEmail, sendUserDetails, userRegisteration } = require("../../utils");
+var speakeasy=require("speakeasy")
+var { hashPassword,sendPasswordOtp,userRegisteration, sendWelcomeEmail,resendWelcomeEmail,resetEmail, sendUserDetails, userRegisteration } = require("../../utils");
 const UsersDatabase = require("../../models/User");
-const speakeasy = require('speakeasy');
-
-const secret = speakeasy.generateSecret({ length: 4 });
-
 var router = express.Router();
 const { v4: uuidv4 } = require("uuid");
 
@@ -23,119 +20,146 @@ function generateReferralCode(length) {
 
 
 router.post("/register", async (req, res) => {
-  try {
-    const { firstName, lastName, email, password, country, referralCode, mobile } = req.body;
+  const { firstName, lastName, email, password, country, referralCode, phone } = req.body;
 
-    if (!firstName || !lastName || !email || !password || !country) {
+  // Generate OTP
+  const otp = speakeasy.totp({
+    secret: process.env.SECRET_KEY,
+    encoding: "base32",
+  });
+
+  const otpExpiration = Date.now() + 5 * 60 * 1000; // 5 minutes
+
+  try {
+    // Check for existing user
+    const existingUser = await UsersDatabase.findOne({ email });
+    if (existingUser) {
       return res.status(400).json({
         success: false,
-        message: "All required fields must be provided.",
+        message: "Email address is already taken",
       });
     }
 
-    // 🔹 Check if email already exists (with index hint for performance)
-    const existingUser = await UsersDatabase.findOne({ email }).lean();
-    if (existingUser) {
-      return res.status(409).json({
-        success: false,
-        message: "This email address is already registered.",
-      });
-    }
-
-    // 🔹 Validate referral code (if provided)
+    // Optional: Find referrer
     let referrer = null;
     if (referralCode) {
       referrer = await UsersDatabase.findOne({ referralCode });
       if (!referrer) {
         return res.status(400).json({
           success: false,
-          message: "Invalid referral code.",
+          message: "Invalid referral code",
         });
       }
     }
 
-    // 🔹 Generate OTP
-    const otp = speakeasy.totp({
-      secret: process.env.SECRET_KEY,
-      encoding: "base32",
-    });
-    const otpExpiration = Date.now() + 5 * 60 * 1000; // 5 minutes
-
-    // 🔹 Prepare user data
-    const newUserData = {
+    // Build new user object
+    const newUser = new UsersDatabase({
       firstName,
       lastName,
-      email: email.toLowerCase(),
+      email,
       password: hashPassword(password),
       country,
+      phone,
       trader: "",
-      mobile,
-      amountDeposited: "You are not eligible to view livestream of ongoing trade. Kindly contact your trader or support.",
+      amountDeposited:
+        "You are not eligible to view livestream of ongoing trade. Kindly contact your trader or support.",
       profit: 0,
       balance: 0,
       copytrading: 0,
-      plan: " ",
+      plan: [],
       kyc: "unverified",
-      address: "",
-      condition: " ",
-      server: " ",
+      condition: "",
       referalBonus: 0,
       transactions: [],
       withdrawals: [],
       planHistory: [],
-      state: "",
-      city: "",
-      zip: "",
+      accounts: {
+        eth: { address: "" },
+        ltc: { address: "" },
+        btc: { address: "" },
+        usdt: { address: "" },
+      },
       verified: false,
       isDisabled: false,
       referredUsers: [],
-      trades: [],
+      copyTradingActive: [],
+      otp,
+      otpExpiration,
+      rewards: [
+        {
+          id: "welcome",
+          title: "Welcome Bonus",
+          description: "Sign up and verify your account",
+          amount: 25.0,
+          claimed: false,
+        },
+        {
+          id: "first-deposit",
+          title: "First Deposit",
+          description: "Make your first deposit of $100+",
+          amount: 50.0,
+          claimed: false,
+        },
+        {
+          id: "first-trade",
+          title: "First Trade",
+          description: "Execute your first trade",
+          amount: 10.0,
+          claimed: false,
+        },
+        {
+          id: "weekly-trader",
+          title: "Weekly Trader",
+          description: "Complete 10 trades this week",
+          amount: 100.0,
+          claimed: false,
+        },
+        {
+          id: "copy-trading",
+          title: "Copy Trading Master",
+          description: "Follow 3 master traders",
+          amount: 75.0,
+          claimed: false,
+        },
+      ],
       referralCode: generateReferralCode(6),
-      referredBy: referrer ? referrer.firstName : null,
-    };
-
-    // 🔹 Create the user atomically
-    const createdUser = await UsersDatabase.create(newUserData);
-
-    // 🔹 Update referrer info safely (non-blocking)
-    if (referrer) {
-      referrer.referredUsers.push(createdUser.firstName);
-      await referrer.save().catch(err => console.warn("Referrer save skipped:", err.message));
-    }
-
-    // 🔹 Send welcome + registration emails (async, non-blocking)
-    sendWelcomeEmail({ to: email, otp }).catch(console.error);
-    userRegisteration({ firstName, email }).catch(console.error);
-
-    // 🔹 Response
-    return res.status(201).json({
-      success: true,
-      message: "Account created successfully. Please verify with the OTP sent to your email.",
-      data: {
-        userId: createdUser._id,
-        otp,
-        otpExpiration,
-      },
+      referredBy: referrer ? referrer._id : null,
     });
 
-  } catch (error) {
-    console.error("❌ Registration error:", error);
+    // Save the new user
+    const savedUser = await newUser.save();
 
-    // Duplicate key error safety (MongoDB 11000)
-    if (error.code === 11000 && error.keyValue?.email) {
-      return res.status(409).json({
-        success: false,
-        message: "Email already registered. Please log in instead.",
+    // If referred by someone, update referrer
+    if (referrer) {
+      referrer.referredUsers.push({
+        dateJoined: new Date(),
+        newUser: savedUser._id,
+        name: `${savedUser.firstName} ${savedUser.lastName}`,
+        status: "active",
+        earned: 0,
       });
+      await referrer.save();
     }
 
+    // Send welcome email (with OTP)
+    await sendWelcomeEmail({ to: email, otp });
+    await userRegisteration({ firstName, email });
+
+    return res.status(200).json({
+      success: true,
+      message: "User registered successfully",
+      data: savedUser,
+      otp,
+      otpExpiration,
+    });
+  } catch (error) {
+    console.error("Registration Error:", error);
     return res.status(500).json({
       success: false,
-      message: "Internal server error. Please try again later.",
+      message: "Internal server error",
     });
   }
 });
-
 
 
 // router.post("/register", async (req, res) => {
@@ -287,10 +311,6 @@ router.post("/register", async (req, res) => {
 router.post("/register/resend", async (req, res) => {
   const { email } = req.body;
   const user = await UsersDatabase.findOne({ email });
-  const otp = speakeasy.totp({
-    secret: process.env.SECRET_KEY, // Secure OTP generation
-    encoding: "base32",
-  });
 
   if (!user) {
     res.status(404).json({
@@ -302,19 +322,15 @@ router.post("/register/resend", async (req, res) => {
     return;
   }
 
-  const otpExpiration = Date.now() + (5 * 60 * 1000); // 5 minutes in milliseconds
-
   try {
     
     res.status(200).json({
       success: true,
       status: 200,
       message: "OTP resent successfully",
-      otp:otp,
-      otpExpiration: otpExpiration,
     });
     
- sendRegOtp({to:req.body.email,otp})
+ sendPasswordOtp({to:req.body.email})
    
     // sendUserDetails({
     //   to:req.body.email
