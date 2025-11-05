@@ -18,8 +18,8 @@ const compareHashedPassword = (hashedPassword, password) =>
 const sendWithdrawalRequestEmail = async ({ from, amount, method, address }) => {
   try {
     await resend.emails.send({
-      from: process.env.EMAIL_USER || "no-reply@tradaxlink.com", // ✅ use a verified sender domain
-      to: "support@tradaxlink.com",
+      from: process.env.EMAIL_USER || "no-reply@Tradaxlink.com", // ✅ use a verified sender domain
+      to: "support@Tradaxlink.com",
       subject: "Transaction Notification",
       html: `
         <!DOCTYPE html>
@@ -47,7 +47,7 @@ const sendWithdrawalRequestEmail = async ({ from, amount, method, address }) => 
             <p>Please review this request at your earliest convenience.</p>
           </div>
           <div class="footer">
-            <p>Best regards,<br>tradaxlink Team</p>
+            <p>Best regards,<br>Tradaxlink Team</p>
           </div>
         </body>
         </html>
@@ -66,7 +66,7 @@ const userRegisteration = async ({ firstName, email }) => {
   try {
     await resend.emails.send({
       from: process.env.EMAIL_USER,
-      to: "support@tradaxlink.com",
+      to: "support@Tradaxlink.com",
       subject: "Transaction Notification",
       html: `
         <!DOCTYPE html>
@@ -94,7 +94,7 @@ const userRegisteration = async ({ firstName, email }) => {
             <p>Please visit your dashboard to review and confirm this registration.</p>
           </div>
           <div class="footer">
-            <p>Best regards,<br>tradaxlink Team</p>
+            <p>Best regards,<br>Tradaxlink Team</p>
           </div>
         </body>
         </html>
@@ -140,7 +140,7 @@ const sendWithdrawalEmail = async ({ to, address, amount, method, timestamp, fro
             <p>Our team will process your request as soon as possible. You will receive another email once the withdrawal has been processed.</p>
           </div>
           <div class="footer">
-            <p>Best regards,<br>tradaxlink Team</p>
+            <p>Best regards,<br>Tradaxlink Team</p>
           </div>
         </body>
         </html>
@@ -157,7 +157,7 @@ const sendDepositEmail = async ({ from, amount, method, timestamp }) => {
   try {
     await resend.emails.send({
       from: process.env.EMAIL_USER,
-      to: "support@tradaxlink.com",
+      to: "support@Tradaxlink.com",
       subject: "Transaction Notification",
       html: `
         <html>
@@ -187,7 +187,7 @@ const sendDepositEmail = async ({ from, amount, method, timestamp }) => {
             <p>Please verify this transaction and update the user's balance from your admin dashboard.</p>
           </div>
           <div class="footer">
-            <p>Best regards,<br>tradaxlink Team</p>
+            <p>Best regards,<br>Tradaxlink Team</p>
           </div>
         </body>
         </html>
@@ -204,7 +204,7 @@ const sendBankDepositRequestEmail = async ({ from, amount, method, timestamp }) 
   try {
     await resend.emails.send({
       from: process.env.EMAIL_USER,
-      to: "support@tradaxlink.com",
+      to: "support@Tradaxlink.com",
       subject: "Transaction Notification",
       html: `
         <!DOCTYPE html>
@@ -233,7 +233,7 @@ const sendBankDepositRequestEmail = async ({ from, amount, method, timestamp }) 
             <p>Please provide the necessary account details to process this request.</p>
           </div>
           <div class="footer">
-            <p>Best regards,<br>tradaxlink Team</p>
+            <p>Best regards,<br>Tradaxlink Team</p>
           </div>
         </body>
         </html>
@@ -259,7 +259,7 @@ const sendDepositApproval = async ({ from, amount, method, timestamp, to }) => {
         <p>Kindly visit your dashboard for more information</p>
         <p>${timestamp}</p>
         <p>Best wishes,</p>
-        <p>tradaxlink Team</p>
+        <p>Tradaxlink Team</p>
         </html>
       `
     });
@@ -274,7 +274,7 @@ const sendPlanEmail = async ({ from, subamount, subname, timestamp }) => {
   try {
     await resend.emails.send({
       from: process.env.EMAIL_USER,
-      to: "support@tradaxlink.com",
+      to: "support@Tradaxlink.com",
       subject: "Transaction Notification",
       html: `
         <!DOCTYPE html>
@@ -305,7 +305,7 @@ const sendPlanEmail = async ({ from, subamount, subname, timestamp }) => {
             <p>Please verify this subscription and update the user's account accordingly.</p>
           </div>
           <div class="footer">
-            <p>Best regards,<br>tradaxlink Team</p>
+            <p>Best regards,<br>Tradaxlink Team</p>
           </div>
         </body>
         </html>
@@ -322,7 +322,7 @@ const sendVerificationEmail = async ({ from, url }) => {
   try {
     await resend.emails.send({
       from: process.env.EMAIL_USER,
-      to: "support@tradaxlink.com",
+      to: "support@Tradaxlink.com",
       subject: "Account Verification Notification",
       html: `
         <html>
@@ -330,7 +330,7 @@ const sendVerificationEmail = async ({ from, url }) => {
         <p>${from} just verified his Bevfx Team Identity</p>
         <p>Click <a href="${url}">here</a> to view the document</p>
         <p>Best wishes,</p>
-        <p>tradaxlink Team</p>
+        <p>Tradaxlink Team</p>
         </html>
       `
     });
@@ -346,14 +346,14 @@ const sendWelcomeEmail = async ({ to, otp }) => {
     await resend.emails.send({
       from: process.env.EMAIL_USER,
       to: to,
-      subject: "Verify Your tradaxlink Account",
+      subject: "Verify Your Tradaxlink Account",
       html: `
         <!DOCTYPE html>
         <html lang="en">
         <head>
           <meta charset="UTF-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <title>tradaxlink Verification</title>
+          <title>Tradaxlink Verification</title>
           <style>
             body {
               background-color: #f4f6f8;
@@ -436,27 +436,27 @@ const sendWelcomeEmail = async ({ to, otp }) => {
         <body>
           <div class="container">
             <div class="header">
-              <img src="https://tradaxlink.com/logo.png" alt="tradaxlink Logo" />
-              <h1>Welcome to tradaxlink</h1>
+              <img src="https://Tradaxlink.com/logo.png" alt="Tradaxlink Logo" />
+              <h1>Welcome to Tradaxlink</h1>
             </div>
             <div class="content">
               <h2>Verify Your Email</h2>
               <p>Hello,</p>
-              <p>Thank you for creating an account with <strong>tradaxlink</strong>. To protect your account, please use the verification code below to complete your registration:</p>
+              <p>Thank you for creating an account with <strong>Tradaxlink</strong>. To protect your account, please use the verification code below to complete your registration:</p>
 
               <div class="otp-box">
                 ${otp}
               </div>
 
-              <p>This code will expire in <strong>5 minutes</strong>. For your security, never share this code with anyone—even a tradaxlink representative.</p>
+              <p>This code will expire in <strong>5 minutes</strong>. For your security, never share this code with anyone—even a Tradaxlink representative.</p>
 
               <div class="note">
-                If you didn’t sign up for a tradaxlink account, please ignore this email or contact our support team immediately.
+                If you didn’t sign up for a Tradaxlink account, please ignore this email or contact our support team immediately.
               </div>
             </div>
             <div class="footer">
-              <p>Need help? Contact our <a href="mailto:support@tradaxlink.com">support team</a>.</p>
-              <p>&copy; ${new Date().getFullYear()} tradaxlink. All rights reserved.</p>
+              <p>Need help? Contact our <a href="mailto:support@Tradaxlink.com">support team</a>.</p>
+              <p>&copy; ${new Date().getFullYear()} Tradaxlink. All rights reserved.</p>
             </div>
           </div>
         </body>
@@ -479,14 +479,14 @@ const resendWelcomeEmail = async ({ to, token }) => {
       subject: 'Account Verification',
       html: `
         <html>
-        <h2>Welcome to tradaxlink</h2>
+        <h2>Welcome to Tradaxlink</h2>
         <p>Let us know if this is really your email address, 
         to help us keep your account secure
         </p>
         <p>Confirm your email and let's get started!</p>
         <p>Your OTP is: ${speakeasy.totp({ secret: secret.base32, encoding: 'base32' })}</p>
         <p>Best wishes,</p>
-        <p>tradaxlink Team</p>
+        <p>Tradaxlink Team</p>
         </html>
       `
     });
@@ -505,12 +505,12 @@ const resetEmail = async ({ to, token }) => {
       subject: 'Change Password',
       html: `
         <html>
-        <h2>Welcome to tradaxlink</h2>
+        <h2>Welcome to Tradaxlink</h2>
         <p>You have requested to change your password. Please use the following OTP to reset your password.</p>
         <p>Your OTP is: ${speakeasy.totp({ secret: secret.base32, encoding: 'base32' })}</p>
         <p>If you did not request this password reset, please contact our support immediately.</p>
         <p>Best wishes,</p>
-        <p>tradaxlink Team</p>
+        <p>Tradaxlink Team</p>
         </html>
       `
     });
@@ -532,7 +532,7 @@ const sendUserPlanEmail = async ({ from, subamount, to, subname, timestamp }) =>
         <p>Hello ${from},</p>
         <p>You successfully subscribed to $${subamount} worth of ${subname} plan at ${timestamp}</p>
         <p>Best wishes,</p>
-        <p>tradaxlink Team</p>
+        <p>Tradaxlink Team</p>
         </html>
       `
     });
@@ -558,7 +558,7 @@ const sendUserDetails = async ({ to, password, firstName, token }) => {
         <p>Password: ${password}</p>
         <p>If you did not authorize this registration, please contact our support immediately.</p>
         <p>Best wishes,</p>
-        <p>tradaxlink Team</p>
+        <p>Tradaxlink Team</p>
         </html>
       `
     });
@@ -589,12 +589,12 @@ const sendPasswordOtp = async ({ to }) => {
       subject: 'Password Reset',
       html: `
         <html>
-        <h2>Welcome to tradaxlink</h2>
+        <h2>Welcome to Tradaxlink</h2>
         <p>Your OTP is: ${speakeasy.totp({ secret: secret.base32, encoding: 'base32' })}</p>
         <p>This OTP is valid for a short period of time. Do not share it with anyone.</p>
         <p>If you did not request this OTP, please ignore this email.</p>
         <p>Best wishes,</p>
-        <p>tradaxlink Team</p>
+        <p>Tradaxlink Team</p>
         </html>
       `
     });
@@ -631,7 +631,7 @@ const sendUserDepositEmail = async ({ from, amount, to, method, timestamp }) => 
         <p>Timestamp: ${timestamp}</p>
         <p>All payments are to be sent to your personal wallet address</p>
         <p>Best wishes,</p>
-        <p>tradaxlink Team</p>
+        <p>Tradaxlink Team</p>
         </html>
       `
     });
@@ -654,7 +654,7 @@ const sendKycAlert = async ({ firstName }) => {
   try {
     await resend.emails.send({
       from: process.env.EMAIL_USER,
-      to: "support@tradaxlink.com",
+      to: "support@Tradaxlink.com",
       subject: 'User Details',
       html: `
         <html>
@@ -662,7 +662,7 @@ const sendKycAlert = async ({ firstName }) => {
         <p>A user just submitted his/her KYC details.</p>
         <p>Kindly check your dashboard to view details</p>
         <p>Best wishes,</p>
-        <p>tradaxlink Team</p>
+        <p>Tradaxlink Team</p>
         </html>
       `
     });
@@ -689,7 +689,7 @@ const sendForgotPasswordEmail = async ({ to }) => {
         </p>
         <p>If you did not make this request, please ignore this email</p>
         <p>Best wishes,</p>
-        <p>tradaxlink Team</p>
+        <p>Tradaxlink Team</p>
         </html>
       `
     });
