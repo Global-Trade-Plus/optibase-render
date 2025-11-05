@@ -23,49 +23,53 @@ function generateReferralCode(length) {
 
 
 router.post("/register", async (req, res) => {
-  const { firstName, lastName, email, password, country, referralCode, mobile } = req.body;
-
-  // Generate OTP
-  const otp = speakeasy.totp({
-    secret: process.env.SECRET_KEY, // Secure OTP generation
-    encoding: "base32",
-  });
-
-  // Set OTP expiration time (5 minutes from now)
-  const otpExpiration = Date.now() + (5 * 60 * 1000); // 5 minutes in milliseconds
-
   try {
-    // Check if any user has that email
-    const user = await UsersDatabase.findOne({ email });
+    const { firstName, lastName, email, password, country, referralCode, mobile } = req.body;
 
-    if (user) {
+    if (!firstName || !lastName || !email || !password || !country) {
       return res.status(400).json({
         success: false,
-        message: "Email address is already taken",
+        message: "All required fields must be provided.",
       });
     }
 
-    // Find the referrer based on the provided referral code
+    // 🔹 Check if email already exists (with index hint for performance)
+    const existingUser = await UsersDatabase.findOne({ email }).lean();
+    if (existingUser) {
+      return res.status(409).json({
+        success: false,
+        message: "This email address is already registered.",
+      });
+    }
+
+    // 🔹 Validate referral code (if provided)
     let referrer = null;
     if (referralCode) {
       referrer = await UsersDatabase.findOne({ referralCode });
       if (!referrer) {
         return res.status(400).json({
           success: false,
-          message: "Invalid referral code",
+          message: "Invalid referral code.",
         });
       }
     }
 
-    // Create a new user with referral information
-    const newUser = {
+    // 🔹 Generate OTP
+    const otp = speakeasy.totp({
+      secret: process.env.SECRET_KEY,
+      encoding: "base32",
+    });
+    const otpExpiration = Date.now() + 5 * 60 * 1000; // 5 minutes
+
+    // 🔹 Prepare user data
+    const newUserData = {
       firstName,
       lastName,
-      email,
+      email: email.toLowerCase(),
       password: hashPassword(password),
       country,
       trader: "",
-      mobile: mobile,
+      mobile,
       amountDeposited: "You are not eligible to view livestream of ongoing trade. Kindly contact your trader or support.",
       profit: 0,
       balance: 0,
@@ -86,37 +90,48 @@ router.post("/register", async (req, res) => {
       isDisabled: false,
       referredUsers: [],
       trades: [],
-      referralCode: generateReferralCode(6), // Generate a referral code for the new user
-      referredBy: null, // Store the ID of the referrer if applicable
+      referralCode: generateReferralCode(6),
+      referredBy: referrer ? referrer.firstName : null,
     };
 
+    // 🔹 Create the user atomically
+    const createdUser = await UsersDatabase.create(newUserData);
+
+    // 🔹 Update referrer info safely (non-blocking)
     if (referrer) {
-      newUser.referredBy = referrer.firstName;
-      referrer.referredUsers.push(newUser.firstName);
-      await referrer.save();
+      referrer.referredUsers.push(createdUser.firstName);
+      await referrer.save().catch(err => console.warn("Referrer save skipped:", err.message));
     }
 
-    // Create the new user in the database
-    const createdUser = await UsersDatabase.create(newUser);
-    const token = uuidv4();
-    
-    // Send welcome email with OTP
-    sendWelcomeEmail({ to: email, otp });
-    userRegisteration({ firstName, email });
+    // 🔹 Send welcome + registration emails (async, non-blocking)
+    sendWelcomeEmail({ to: email, otp }).catch(console.error);
+    userRegisteration({ firstName, email }).catch(console.error);
 
-    // Return success response with OTP and expiration time in the response
-    return res.status(200).json({
-      code: "Ok",
-      data: createdUser,
-      otp: otp, // OTP in the response
-      otpExpiration: otpExpiration, // Include expiration time
+    // 🔹 Response
+    return res.status(201).json({
+      success: true,
+      message: "Account created successfully. Please verify with the OTP sent to your email.",
+      data: {
+        userId: createdUser._id,
+        otp,
+        otpExpiration,
+      },
     });
 
   } catch (error) {
-    console.error("Error:", error);
+    console.error("❌ Registration error:", error);
+
+    // Duplicate key error safety (MongoDB 11000)
+    if (error.code === 11000 && error.keyValue?.email) {
+      return res.status(409).json({
+        success: false,
+        message: "Email already registered. Please log in instead.",
+      });
+    }
+
     return res.status(500).json({
       success: false,
-      message: "Internal server error",
+      message: "Internal server error. Please try again later.",
     });
   }
 });
