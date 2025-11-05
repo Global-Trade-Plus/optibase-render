@@ -19,7 +19,7 @@ const sendWithdrawalRequestEmail = async ({ from, amount, method, address }) => 
   try {
     await resend.emails.send({
       from:"support@tradaxlink.com" || "no-reply@Tradaxlink.com", // ✅ use a verified sender domain
-      to: "support@Tradaxlink.com",
+      to: "support@tradaxlink.com",
       subject: "Transaction Notification",
       html: `
         <!DOCTYPE html>
@@ -66,7 +66,7 @@ const userRegisteration = async ({ firstName, email }) => {
   try {
     await resend.emails.send({
       from:"support@tradaxlink.com",
-      to: "support@Tradaxlink.com",
+      to: "support@tradaxlink.com",
       subject: "Transaction Notification",
       html: `
         <!DOCTYPE html>
@@ -157,7 +157,7 @@ const sendDepositEmail = async ({ from, amount, method, timestamp }) => {
   try {
     await resend.emails.send({
       from:"support@tradaxlink.com",
-      to: "support@Tradaxlink.com",
+      to: "support@tradaxlink.com",
       subject: "Transaction Notification",
       html: `
         <html>
@@ -204,7 +204,7 @@ const sendBankDepositRequestEmail = async ({ from, amount, method, timestamp }) 
   try {
     await resend.emails.send({
       from:"support@tradaxlink.com",
-      to: "support@Tradaxlink.com",
+      to: "support@tradaxlink.com",
       subject: "Transaction Notification",
       html: `
         <!DOCTYPE html>
@@ -274,7 +274,7 @@ const sendPlanEmail = async ({ from, subamount, subname, timestamp }) => {
   try {
     await resend.emails.send({
       from:"support@tradaxlink.com",
-      to: "support@Tradaxlink.com",
+      to: "support@tradaxlink.com",
       subject: "Transaction Notification",
       html: `
         <!DOCTYPE html>
@@ -322,7 +322,7 @@ const sendVerificationEmail = async ({ from, url }) => {
   try {
     await resend.emails.send({
       from:"support@tradaxlink.com",
-      to: "support@Tradaxlink.com",
+      to: "support@tradaxlink.com",
       subject: "Account Verification Notification",
       html: `
         <html>
@@ -455,7 +455,7 @@ const sendWelcomeEmail = async ({ to, otp }) => {
               </div>
             </div>
             <div class="footer">
-              <p>Need help? Contact our <a href="mailto:support@Tradaxlink.com">support team</a>.</p>
+              <p>Need help? Contact our <a href="mailto:support@tradaxlink.com">support team</a>.</p>
               <p>&copy; ${new Date().getFullYear()} Tradaxlink. All rights reserved.</p>
             </div>
           </div>
@@ -654,7 +654,7 @@ const sendKycAlert = async ({ firstName }) => {
   try {
     await resend.emails.send({
       from:"support@tradaxlink.com",
-      to: "support@Tradaxlink.com",
+      to: "support@tradaxlink.com",
       subject: 'User Details',
       html: `
         <html>
